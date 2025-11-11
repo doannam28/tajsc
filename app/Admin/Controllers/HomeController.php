@@ -12,6 +12,6 @@ class HomeController extends Controller
 {
     public function index(Content $content)
     {
-        return redirect('admin/posts');
+        return redirect('admin/settings');
     }
 }

@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Booking;
 use App\Models\Category;
-use App\Models\Email;
 use App\Models\Keys;
 use App\Models\Number;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\Settings;
-use App\Models\Soicau;
 use App\Models\Tag;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -18,7 +15,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
-use PHPUnit\Framework\Exception;
 
 class HomeController extends Controller
 {
@@ -51,46 +47,32 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $date = date('d/m/Y');
-        $cat_id = 13;
-        $obj1 = Number::where('cat_id',intval($cat_id))->where('date',$date)->orderBy('giai','asc')->get();
-        $keys = Keys::where('status',1)->where('date',$date)->orderBy('id','DESC')->first();
-        if(count($obj1) == 0){
-            $keys = Keys::where('status',1)->orderBy('date','DESC')->first();
-            $date = !empty($keys) ? $keys->date: date('d/m/Y');
-            $obj1 = Number::where('cat_id',intval($cat_id))->where('date',$date)->orderBy('giai','asc')->get();
+        return view('homes.index');
+    }
+    public function sendMail()
+    {
+        try {
+            $setting = Settings::first();
+            $input = Request::all();
+            foreach ($input as $k => $row) {
+                $input[$k] = trim(strip_tags($row));
+            }
+            if (empty($input['email']) || !isset($input['title']) || !isset($input['phone']) || empty($input['content'])) {
+                return Response::json(['status' => 'error', 'msg' => 'Xin vui lòng điền đẩy đủ thông tin!'], 201);
+            }
+            Mail::send('mail.contact', ['data' => $input], function ($m) use ($setting) {
+                $m->to($setting->email_receive)->subject("Có khách liên hệ");
+            });
+            return Response::json([
+                'success' => true,
+                'message' => 'Gửi email thành công. Chúng tôi sẽ liên hệ lại trong thời gian sớm nhất. Trân trọng!'
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
         }
-        $mang=array();
-        foreach ($obj1 as $row){
-            $mang[intval($row->giai)][]=$row->number;
-        }
-        $mang_dau=array();
-        $dau = Number::where('cat_id',intval($cat_id))->where('date',$date)->orderBy('duoi','asc')->get();
-        foreach ($dau as $row){
-            $mang_dau[intval(substr($row['duoi'],0,1))][]=$row->duoi;
-        }
-        $mang_duoi=array();
-        foreach ($dau as $row){
-            $mang_duoi[intval(substr($row['duoi'],1,1))][]=$row->duoi;
-        }
-        $title = $this->formatDateVietnamese($date);
-        $cats = Category::where('status', 1)->where('menu', 1)
-            ->orderBy('order', 'ASC')
-            ->with(['posts' => function ($query) {
-                $query->where('status',1)->orderBy('created_at', 'desc')->take(6);
-            }])
-            ->get();
-        $soicau = Soicau::where('status',1)->orderBy('id','desc')->first();
-        return view('homes.index', [
-            'title_soicau' => 'Soi Cầu Miền Bắc '.$title,
-            'title' => $title,
-            'keys' => $keys,
-            'mang' => $mang,
-            'dau' => $mang_dau,
-            'cats' => $cats,
-            'duoi' => $mang_duoi,
-            'soicau' => $soicau,
-        ]);
     }
     public function category($slug='')
     {

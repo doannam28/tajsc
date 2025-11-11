@@ -10,4 +10,4 @@ Route::get('/ket-qua', [\App\Http\Controllers\HomeController::class, 'ketqua']);
 Route::get('/bai-viet/{slug1}', [\App\Http\Controllers\HomeController::class, 'detail']);
 Route::get('/{slug}/{slug1}', [\App\Http\Controllers\HomeController::class, 'detail']);
 Route::get('/{slug}', [\App\Http\Controllers\HomeController::class, 'category']);
-
+Route::post('/send', [\App\Http\Controllers\HomeController::class, 'sendMail']);
