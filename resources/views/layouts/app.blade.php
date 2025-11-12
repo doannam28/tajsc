@@ -30,8 +30,8 @@
                         <ul class="menu clearfix">
                             <li class="active"><a href="#">Trang chủ</a></li>
                             <li><a href="#sp">Sản phẩm và Dịch vụ</a></li>
-                            <li><a href="#lh">Triển khai</a></li>
-                            <li><a href="#tscct">Liên hệ hỗ trợ</a></li>
+                            <li><a href="#tscct">Triển khai</a></li>
+                            <li><a href="#lh">Liên hệ hỗ trợ</a></li>
                         </ul>
                     </div>
                     <div class="h_phone d-none"><a href="https://pk.healthchain.vn/portal" target="_blank">Patient Portal</a><a href="https://pk.healthchain.vn"
@@ -70,7 +70,7 @@
                 <ul class="f_menu">
                     <li><a href="#gt">Giới thiệu</a></li>
                     <li><a href="#sp">Dịch vụ</a></li>
-                    <li><a href="https://pk.healthchain.vn" target="_blank">EzClinic</a></li>
+                    <li><a href="#lh">Liên hệ</a></li>
                 </ul>
             </div>
         </div>
