@@ -46,7 +46,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-6">
-                <h2 class="f_logo"><a href="index.html"><img id="img-footer" src="{{Storage::disk('admin')->url($setting->logo)}}" alt="" /></a></h2>
+                <h2 class="f_logo"><a href="/"><img id="img-footer" src="{{Storage::disk('admin')->url($setting->logo_footer)}}" alt="" /></a></h2>
                 <p class="f_text">
                     {!! $setting->textfooter !!}
                 </p>
@@ -80,7 +80,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                <p>&copy; Copyright 2023 - HealthChain Technology Jsc.</p>
+                <p>&copy; Copyright 2025 - Truong An Digital Data Conversion Jsc.</p>
             </div>
         </div>
     </div>

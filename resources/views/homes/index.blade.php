@@ -66,11 +66,6 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                    <p class="sp_lh">Liên hệ với chúng tôi để được tư vấn, demo và trải nghiệm thử miễn phí.</p>
-                </div>
-            </div>
         </div>
     </section>
 
