@@ -58,7 +58,7 @@
                         {{$setting->address}}
                     </li>
                     <li>
-                        <a href="#">{{$setting->phone}}</a>
+                        <a href="tel:+84{{substr($setting->phone,1)}}">{{$setting->phone}}</a>
                     </li>
                     <li>
                         <a href="mailto:{{$setting->email}}?subject=Liên hệ công việc">{{$setting->email}}</a>
